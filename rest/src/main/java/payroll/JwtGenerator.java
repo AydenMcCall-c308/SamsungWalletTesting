@@ -17,7 +17,7 @@ public class JwtGenerator {
         PublicKey partnerPublicKey =
                 JwtManager.readPublicKey(PayloadUtil.getStringFromFile("sample/certificate/partnerPublicKey.pem"));
         PrivateKey partnerPrivateKey =
-                JwtManager.readPrivateKey(PayloadUtil.getStringFromFile("sample/certificate/mySamsungPrivate.key"));
+                JwtManager.readPrivateKey(PayloadUtil.getStringFromFile("sample/certificate/mySamsungPrivate.pem"));
 
         // Boarding pass
         String plainData = new PayloadUtil("sample/payload/BoardingPass.json").getSampleBoardingPass();
