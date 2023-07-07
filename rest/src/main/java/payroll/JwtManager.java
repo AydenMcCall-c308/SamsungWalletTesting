@@ -25,6 +25,11 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
+import java.io.InputStream;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+
 /**
  * This class does not need to be modified.
  */
@@ -74,6 +79,20 @@ public class JwtManager {
             e.printStackTrace();
         }
         return jwsObj.serialize();
+    }
+
+    public static PublicKey readCertificate(String cert) {
+        Certificate certificate = null;
+        byte[] keyByte = readKeyByte(cert);
+        InputStream is = new ByteArrayInputStream(keyByte);
+        try {
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            certificate = cf.generateCertificate(is);
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        }
+        assert certificate != null;
+        return certificate.getPublicKey();
     }
 
     public static PrivateKey readPrivateKey(String key) {

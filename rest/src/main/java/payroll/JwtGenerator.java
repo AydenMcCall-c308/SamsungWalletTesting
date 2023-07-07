@@ -12,15 +12,20 @@ public class JwtGenerator {
 
     public static String produce_cdata () {
 
-        PublicKey samsungPublicKey =
+        /*PublicKey samsungPublicKey =
                 JwtManager.readPublicKey(PayloadUtil.getStringFromFile("sample/certificate/samsungPublicKey.pem"));
         PublicKey partnerPublicKey =
-                JwtManager.readPublicKey(PayloadUtil.getStringFromFile("sample/certificate/partnerPublicKey.pem"));
+                JwtManager.readPublicKey(PayloadUtil.getStringFromFile("sample/certificate/partnerPublicKey.pem"));*/
+        PublicKey samsungPublicKey =
+                JwtManager.readCertificate(PayloadUtil.getStringFromFile("sample/certificate/samsungCert.pem"));
+        PublicKey partnerPublicKey =
+                JwtManager.readCertificate(PayloadUtil.getStringFromFile("sample/certificate/partnerCert.pem"));
         PrivateKey partnerPrivateKey =
-                JwtManager.readPrivateKey(PayloadUtil.getStringFromFile("sample/certificate/mySamsungPrivate.pem"));
+                JwtManager.readPrivateKey(PayloadUtil.getStringFromFile("sample/certificate/privateKey.key"));
+
 
         // Boarding pass
-        String plainData = new PayloadUtil("sample/payload/BoardingPass.json").getSampleBoardingPass();
+        String plainData = new PayloadUtil("sample/payload/BoardingPass(1).json").getSampleBoardingPass();
 
         // Coupon
         // String plainData = new PayloadUtil("sample/payload/Coupon.json").getSampleCoupon();
